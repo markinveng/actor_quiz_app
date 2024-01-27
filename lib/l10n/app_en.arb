@@ -1,0 +1,14 @@
+{
+  "@@locale":"en",
+  "questionActorText": "Who is this actor?",
+  "inputNameFirstName": "First Name",
+  "inputNameMiddleName": "Middle Name",
+  "inputNameLastName": "Last Name",
+  "answerButton": "Answer",
+  "errorDataFetch": "Failed To Get Data",
+  "errorRestart": "Please Restart",
+  "restart": "Restart",
+  "result": "Result",
+  "score": "Score",
+  "back": "Back"
+}

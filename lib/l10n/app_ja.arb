@@ -1,0 +1,14 @@
+{
+  "@@locale":"ja",
+  "questionActorText": "この俳優は誰？",
+  "inputNameFirstName": "ファーストネーム",
+  "inputNameMiddleName": "ミドルトネーム",
+  "inputNameLastName": "ラストトネーム",
+  "answerButton": "解答",
+  "errorDataFetch": "データの取得に失敗しました",
+  "errorRestart": "再度お試しください",
+  "restart": "再開",
+  "result": "結果",
+  "score": "得点",
+  "back": "戻る"
+}
