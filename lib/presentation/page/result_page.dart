@@ -1,14 +1,13 @@
 import 'dart:convert';
 
 import 'package:actor_quiz_app/application/usecase/answer_usecase.dart';
+import 'package:actor_quiz_app/core/method/answer_method.dart';
 import 'package:actor_quiz_app/domain/usecase/answer_usecase_interface.dart';
+import 'package:actor_quiz_app/presentation/state/shared_preferences_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
-import '../state/shared_preferences_provider.dart';
-import '../../core/method/answer_method.dart';
 
 class ResultPage extends ConsumerWidget {
   const ResultPage({super.key});

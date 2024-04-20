@@ -1,10 +1,9 @@
 import 'package:actor_quiz_app/domain/repository/answer_repository_interface.dart';
+import 'package:actor_quiz_app/infrastructure/repositories/answer_repository.dart';
+import 'package:actor_quiz_app/presentation/state/shared_preferences_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
-import '../state/shared_preferences_provider.dart';
-import '../../infrastructure/repositories/answer_repository.dart';
 
 class StartPage extends ConsumerWidget {
   const StartPage({super.key});

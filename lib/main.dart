@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       routerDelegate: goRouter.routerDelegate,
       routeInformationParser: goRouter.routeInformationParser,
       routeInformationProvider: goRouter.routeInformationProvider,
-      localizationsDelegates: AppLocalizations.localizationsDelegates, // 追加
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
     );
   }

@@ -34,7 +34,7 @@ class ActorRepositoryImpl implements ActorRepositoryInterFace {
     final int randomId = Random().nextInt(3287502) + 1;
     try {
       final queryParameters = {
-        "api_key": '${Env.key}',
+        "api_key": Env.key,
       };
       final response = await http.get(
         Uri.https('api.themoviedb.org', '/3/person/$randomId', queryParameters),
