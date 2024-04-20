@@ -1,13 +1,14 @@
 import 'dart:convert';
 
+import 'package:actor_quiz_app/application/usecase/answer_usecase.dart';
+import 'package:actor_quiz_app/domain/usecase/answer_usecase_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../application/shared_preferences_provider.dart';
+import '../state/shared_preferences_provider.dart';
 import '../../core/method/answer_method.dart';
-import '../../data/repositories/answer_repository.dart';
 
 class ResultPage extends ConsumerWidget {
   const ResultPage({super.key});
@@ -15,7 +16,7 @@ class ResultPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pref = ref.read(sharedPreferencesProvider);
-    AnswerRepository answerRepository = AnswerRepository(pref: pref);
+    AnswerUserCaseInterface answerRepository = AnswerUseCaseImpl(pref: pref);
     List<String>? resultItem = answerRepository.fetchAnswerList();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,

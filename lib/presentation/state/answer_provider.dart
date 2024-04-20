@@ -11,5 +11,4 @@ class Answer extends _$Answer {
       (index) => TextEditingController(),
     );
   }
-
 }

@@ -1,9 +1,8 @@
+import 'package:actor_quiz_app/presentation/component/input_name_field.dart';
+import 'package:actor_quiz_app/presentation/state/actor_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../application/actor_data_provider.dart';
-import '../widgets/input_name_field.dart';
 
 class AnswerPage extends ConsumerWidget {
   const AnswerPage({super.key});
@@ -54,22 +53,20 @@ class AnswerPage extends ConsumerWidget {
             children: [
               Text(
                 AppLocalizations.of(context).errorDataFetch,
-                style:const TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
                 ),
               ),
               Text(
                 AppLocalizations.of(context).errorRestart,
-                style:const TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
                 ),
               ),
               ElevatedButton(
-                onPressed: () => {
-                  ref.invalidate(actorDataProvider)
-                },
+                onPressed: () => {ref.invalidate(actorDataProvider)},
                 child: Text(
                   AppLocalizations.of(context).restart,
                 ),

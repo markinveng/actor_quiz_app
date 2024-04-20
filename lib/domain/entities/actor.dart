@@ -1,15 +1,17 @@
-import '../value/actor_gender.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-class ActorEntity {
-  final int? id; // 識別ID
-  final String? name; // 名前
-  final int? gender; // 性別
-  final String? profilePath;
+part 'actor.freezed.dart';
+part 'actor.g.dart';
 
-  ActorEntity({
-    required this.id,
-    required this.profilePath,
-    required this.name,
-    required this.gender,
-  });
+@freezed
+class Actor with _$Actor {
+  const factory Actor({
+    required int id,
+    required String name,
+    required int gender,
+    @JsonKey(name: 'profile_path') required String? profilePath,
+  }) = _Actor;
+
+  factory Actor.fromJson(Map<String, dynamic> json) => _$ActorFromJson(json);
 }

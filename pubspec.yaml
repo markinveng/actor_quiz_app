@@ -39,11 +39,11 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   json_serializable: ^6.7.1
-  build_runner: ^2.4.7
+  build_runner: ^2.4.9
   riverpod_generator: ^2.3.8
   riverpod_lint: ^2.3.6
   custom_lint: ^0.5.7
-  envied_generator: ^0.5.2
+  envied_generator: ^0.5.4+1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
