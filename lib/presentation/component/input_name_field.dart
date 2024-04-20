@@ -1,14 +1,16 @@
-import 'package:actor_quiz_app/application/answer_provider.dart';
+import 'package:actor_quiz_app/application/usecase/answer_usecase.dart';
 import 'package:actor_quiz_app/core/method/answer_method.dart';
-import 'package:actor_quiz_app/data/repositories/answer_repository.dart';
+import 'package:actor_quiz_app/domain/usecase/answer_usecase_interface.dart';
+import 'package:actor_quiz_app/presentation/state/actor_data_provider.dart';
+import 'package:actor_quiz_app/presentation/state/answer_provider.dart';
+import 'package:actor_quiz_app/presentation/state/shared_preferences_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../../application/actor_data_provider.dart';
-import '../../application/shared_preferences_provider.dart';
+
 
 class InputNameField extends ConsumerWidget {
   const InputNameField(
@@ -25,8 +27,8 @@ class InputNameField extends ConsumerWidget {
     final List<String> nameArray = name.split(" ");
     List<TextEditingController> answer =
         ref.watch(answerProvider(nameArray.length));
-    final pref = ref.read(sharedPreferencesProvider);
-    AnswerRepository answerRepository = AnswerRepository(pref: pref);
+    final pref = ref.watch(sharedPreferencesProvider);
+    AnswerUserCaseInterface answerUseCase = AnswerUseCaseImpl(pref: pref);
     return SizedBox(
       width: 300,
       height: 200,
@@ -94,8 +96,8 @@ class InputNameField extends ConsumerWidget {
                 "imgPath": profilePath,
                 "judge": judgeName(name, convertName(answer))
               };
-              answerRepository.addAnswer(result);
-              if (answerRepository.fetchAnswerLength()! >= 10) {
+              answerUseCase.addAnswer(result);
+              if (answerUseCase.fetchAnswerLength()! >= 10) {
                 context.go('/result-page');
               } else {
                 ref.invalidate(actorDataProvider);

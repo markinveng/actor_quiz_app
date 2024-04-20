@@ -144,3 +144,5 @@ app.*.symbols
 *.freezed.dart
 *.g.dart
 
+# FVM Version Cache
+.fvm/

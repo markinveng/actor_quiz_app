@@ -1,30 +1,31 @@
 import 'dart:convert';
 
-import 'package:actor_quiz_app/data/repositories/answer_reoisitory_interface.dart';
+import 'package:actor_quiz_app/domain/repository/answer_repository_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AnswerRepository implements AnswerRepositoryInterface {
-  AnswerRepository({required this.pref});
-  final SharedPreferences pref;
+class AnswerRepositoryImpl implements AnswerRepositoryInterface {
   @override
-  void addAnswer(Object answer) {
+  void addAnswer(Object answer, SharedPreferences pref) {
     final answerString = jsonEncode(answer).toString();
     List<String> answerList = pref.getStringList('answer') ?? [];
     answerList.add(answerString);
     pref.setStringList('answer', answerList);
   }
 
-  List<String>? fetchAnswerList() {
+  @override
+  List<String>? fetchAnswerList(SharedPreferences pref) {
     List<String>? answerList = pref.getStringList('answer');
     return answerList;
   }
 
-  int? fetchAnswerLength() {
+  @override
+  int? fetchAnswerLength(SharedPreferences pref) {
     List<String>? answerList = pref.getStringList('answer');
     return answerList?.length;
   }
 
-  void initializeAnswer() {
+  @override
+  void initializeAnswer(SharedPreferences pref) {
     pref.setStringList('answer', []);
   }
 }
