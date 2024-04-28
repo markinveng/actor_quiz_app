@@ -1,7 +1,6 @@
 import 'package:actor_quiz_app/application/usecase/answer_usecase.dart';
 import 'package:actor_quiz_app/core/method/answer_method.dart';
 import 'package:actor_quiz_app/domain/usecase/answer_usecase_interface.dart';
-import 'package:actor_quiz_app/presentation/state/actor_data_provider.dart';
 import 'package:actor_quiz_app/presentation/state/answer_provider.dart';
 import 'package:actor_quiz_app/presentation/state/shared_preferences_provider.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +14,13 @@ class InputNameField extends ConsumerWidget {
       {super.key,
       required this.id,
       required this.name,
-      required this.profilePath});
+      required this.profilePath,
+      required this.actorProvider
+      });
   final String id;
   final String name;
   final String profilePath;
+  final ProviderOrFamily actorProvider;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -98,7 +100,7 @@ class InputNameField extends ConsumerWidget {
               if (answerUseCase.fetchAnswerLength()! >= 10) {
                 context.go('/result-page');
               } else {
-                ref.invalidate(actorDataProvider);
+                ref.invalidate(actorProvider);
               }
             },
             child: Text(

@@ -31,3 +31,14 @@ int getCorrectNum(List<String> resultList) {
   }
   return num;
 }
+
+bool searchConflict(int id, List<String>? answerList) {
+  for(String item in answerList!) {
+    if(item.contains('"id":"$id"')) {
+      //同じidを含んでいたらtrueを返す
+      return true;
+    }
+  }
+  //そうじゃなけれfalse
+  return false;
+}

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:actor_quiz_app/core/env/env.dart';
 import 'package:actor_quiz_app/core/exception/exception.dart';
@@ -10,28 +9,24 @@ import 'package:http/http.dart' as http;
 
 class ActorRepositoryImpl implements ActorRepositoryInterFace {
   @override
-  // Future<PopularActorModel> fetchPopularActorDataList() async {
-  //   final dio = Dio();
-  //   const String uri = 'https://api.themoviedb.org/3/person/popular';
-
-  //   //const String uri = 'https://api.themoviedb.org/3/person/12798';
-
-  //   final String apiKey = '?api_key=${Env.key}';
-  //   final String requestURL = uri + apiKey;
-  //   try {
-  //     final response = await dio.get(requestURL);
-  //     final responseData = response.data;
-  //     print(responseData);
-  //     return PopularActorModel.fromJson(responseData);
-  //   } on Exception {
-  //     debugPrint('Fail ActorData.');
-  //     throw ServerException();
-  //   }
-  // }
+  Future<List<Actor>?> fetchPopularActorDataList(int randomId) async {
+    try {
+      final response = await http.get(Uri.parse("https://api.themoviedb.org/3/person/popular?page=$randomId&api_key=${Env.key}"));
+      if (response.statusCode == 200) {
+        final jsonData = jsonDecode(response.body)["results"];
+        return jsonData.map<Actor>((data) => Actor.fromJson(data)).toList();
+      } else {
+        debugPrint('Fail to fetchPopularActorData in actor_repository.dart');
+        return null;
+      }
+    } on Exception {
+      debugPrint('Fail to fetchPopularActorData in actor_repository.dart');
+      throw ServerException();
+    }
+  }
 
   @override
-  Future<Actor?> fetchActorData() async {
-    final int randomId = Random().nextInt(3287502) + 1;
+  Future<Actor?> fetchActorData(int randomId) async {
     try {
       final queryParameters = {
         "api_key": Env.key,

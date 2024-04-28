@@ -1,5 +1,8 @@
+import 'package:actor_quiz_app/application/usecase/answer_usecase.dart';
+import 'package:actor_quiz_app/domain/usecase/answer_usecase_interface.dart';
 import 'package:actor_quiz_app/presentation/component/input_name_field.dart';
 import 'package:actor_quiz_app/presentation/state/actor_data_provider.dart';
+import 'package:actor_quiz_app/presentation/state/shared_preferences_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,8 +14,11 @@ class AnswerPage extends ConsumerWidget {
     Size screenSize = MediaQuery.of(context).size;
     double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
-
-    final actorProvider = ref.watch(actorDataProvider);
+    //TODO: 他の俳優と被らないようにバリデートする
+    final pref = ref.read(sharedPreferencesProvider);
+    AnswerUserCaseInterface answerUsecase = AnswerUseCaseImpl(pref: pref);
+    List<String>? resultItem = answerUsecase.fetchAnswerList();
+    final actor = ref.watch(actorDataProvider);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       resizeToAvoidBottomInset: true,
@@ -20,7 +26,7 @@ class AnswerPage extends ConsumerWidget {
         title: Text(AppLocalizations.of(context).questionActorText),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
-      body: actorProvider.when(
+      body: actor.when(
         skipLoadingOnRefresh: false,
         data: (data) => SingleChildScrollView(
           child: Container(
@@ -34,13 +40,14 @@ class AnswerPage extends ConsumerWidget {
                     width: screenWidth * 0.5,
                     height: screenHeight * 0.5,
                     child: Image.network(
-                      'https://image.tmdb.org/t/p/w780${data.profilePath}',
+                      'https://image.tmdb.org/t/p/w780${data!.profilePath}',
                     ),
                   ),
                   InputNameField(
                     id: data.id.toString(),
                     name: data.name.toString(),
                     profilePath: data.profilePath.toString(),
+                    actorProvider: actorDataProvider,
                   ),
                 ],
               ),
@@ -66,7 +73,9 @@ class AnswerPage extends ConsumerWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () => {ref.invalidate(actorDataProvider)},
+                onPressed: () => {
+                  ref.invalidate(actorDataProvider)
+                  },
                 child: Text(
                   AppLocalizations.of(context).restart,
                 ),
@@ -76,7 +85,11 @@ class AnswerPage extends ConsumerWidget {
         ),
         loading: () => Container(
           padding: EdgeInsets.fromLTRB(
-              screenWidth * 0.03, screenHeight * 0, screenWidth * 0.03, 0),
+            screenWidth * 0.03,
+            screenHeight * 0,
+            screenWidth * 0.03,
+            0,
+          ),
           child: const Center(
             child: Align(
               alignment: Alignment.center,

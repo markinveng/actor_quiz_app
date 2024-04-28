@@ -21,6 +21,15 @@ class StartPage extends ConsumerWidget {
             ElevatedButton(
               onPressed: () {
                 answerUseCase.initializeAnswer(pref);
+                answerUseCase.setAnswerType(1, pref);
+                context.go('/answer-page');
+              },
+              child: const Text("Lets's Start!"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                answerUseCase.initializeAnswer(pref);
+                answerUseCase.setAnswerType(2, pref);
                 context.go('/answer-page');
               },
               child: const Text("Lets's Start!"),

@@ -15,8 +15,8 @@ class ResultPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pref = ref.read(sharedPreferencesProvider);
-    AnswerUserCaseInterface answerRepository = AnswerUseCaseImpl(pref: pref);
-    List<String>? resultItem = answerRepository.fetchAnswerList();
+    AnswerUserCaseInterface answerUsecase = AnswerUseCaseImpl(pref: pref);
+    List<String>? resultItem = answerUsecase.fetchAnswerList();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       resizeToAvoidBottomInset: true,

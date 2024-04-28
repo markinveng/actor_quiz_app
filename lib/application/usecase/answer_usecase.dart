@@ -9,6 +9,11 @@ class AnswerUseCaseImpl implements AnswerUserCaseInterface {
   final SharedPreferences pref;
   final AnswerRepositoryInterface answerRepository = AnswerRepositoryImpl();
   @override
+  void setAnswerType(int flg) {
+    answerRepository.setAnswerType(flg, pref);
+  }
+
+  @override
   void addAnswer(Object answer) {
     answerRepository.addAnswer(answer, pref);
   }
