@@ -9,19 +9,22 @@ KEY=[API_KEY]
 ## コマンド
 - クローン
 ```sh
+## https
 git clone https://github.com/markinveng/actor_quiz_app.git
+## ssh
+git clone git@github.com:markinveng/actor_quiz_app.git   
 ```
 - パッケージインストール
 ```sh
 fvm flutter pub get
 ```
-- 生成コードの生成(Freezed, Riverpod generator, Envied)
-```sh
-fvm flutter pub run build_runner build --delete-conflicting-outputs
-```
 - 国際化テキストの生成
 ```sh
 fvm flutter gen-l10n  --no-nullable-getter 
+```
+- 生成コードの生成(Freezed, Riverpod generator, Envied)
+```sh
+fvm flutter pub run build_runner build --delete-conflicting-outputs
 ```
 - 実行
 ```sh
