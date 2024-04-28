@@ -14,8 +14,6 @@ Future<Actor?> actorData(ActorDataRef ref) async {
   ActorUseCaseInterface actorUseCase = ActorUseCaseImpl();
   AnswerRepositoryInterface answerUseCase = AnswerRepositoryImpl();
   final int? answerType = answerUseCase.getAnswerType(pref);
-  //TODO: Answer用のモデルを定義してAnswerListをjsonDecodeして扱うようにリファクタリングする
-  //resultItemから一個づつ繰り返しながら、中身のアイテムを取ってくる。それぞれのItemをJsonDecodeしてidが同一のものがある場合は
   final List<String>? answerList = answerUseCase.fetchAnswerList(pref);
   return await actorUseCase.fetchActorData(answerType ?? 4, answerList);
 }

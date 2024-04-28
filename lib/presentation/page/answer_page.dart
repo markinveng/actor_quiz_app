@@ -1,8 +1,5 @@
-import 'package:actor_quiz_app/application/usecase/answer_usecase.dart';
-import 'package:actor_quiz_app/domain/usecase/answer_usecase_interface.dart';
 import 'package:actor_quiz_app/presentation/component/input_name_field.dart';
 import 'package:actor_quiz_app/presentation/state/actor_data_provider.dart';
-import 'package:actor_quiz_app/presentation/state/shared_preferences_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,10 +11,6 @@ class AnswerPage extends ConsumerWidget {
     Size screenSize = MediaQuery.of(context).size;
     double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
-    //TODO: 他の俳優と被らないようにバリデートする
-    final pref = ref.read(sharedPreferencesProvider);
-    AnswerUserCaseInterface answerUsecase = AnswerUseCaseImpl(pref: pref);
-    List<String>? resultItem = answerUsecase.fetchAnswerList();
     final actor = ref.watch(actorDataProvider);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
