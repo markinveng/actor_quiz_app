@@ -22,7 +22,7 @@ class StartPage extends ConsumerWidget {
               onPressed: () {
                 answerUseCase.initializeAnswer(pref);
                 answerUseCase.setAnswerType(1, pref);
-                context.go('/answer-page');
+                context.pushNamed('AnswerPage');
               },
               child: const Text("Lets's Start!"),
             ),
@@ -30,7 +30,7 @@ class StartPage extends ConsumerWidget {
               onPressed: () {
                 answerUseCase.initializeAnswer(pref);
                 answerUseCase.setAnswerType(2, pref);
-                context.go('/answer-page');
+                context.pushNamed('AnswerPage');
               },
               child: const Text("Lets's Start!"),
             )

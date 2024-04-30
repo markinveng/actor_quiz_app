@@ -10,35 +10,37 @@ final goRouter = GoRouter(
   // パスと画面の組み合わせ
   routes: [
     GoRoute(
-      path: '/start-page',
-      name: 'StartPage',
-      pageBuilder: (context, state) {
-        return MaterialPage(
-          key: state.pageKey,
-          child: const StartPage(),
-        );
-      },
-    ),
-    GoRoute(
-      path: '/answer-page',
-      name: 'AnswerPage',
-      pageBuilder: (context, state) {
-        return MaterialPage(
-          key: state.pageKey,
-          child: const AnswerPage(),
-        );
-      },
-    ),
-    GoRoute(
-      path: '/result-page',
-      name: 'ResultPage',
-      pageBuilder: (context, state) {
-        return MaterialPage(
-          key: state.pageKey,
-          child: const ResultPage(),
-        );
-      },
-    ),
+        path: '/start-page',
+        name: 'StartPage',
+        pageBuilder: (context, state) {
+          return MaterialPage(
+            key: state.pageKey,
+            child: const StartPage(),
+          );
+        },
+        routes: [
+          GoRoute(
+              path: 'answer-page',
+              name: 'AnswerPage',
+              pageBuilder: (context, state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: const AnswerPage(),
+                );
+              },
+              routes: [
+                GoRoute(
+                  path: 'result-page',
+                  name: 'ResultPage',
+                  pageBuilder: (context, state) {
+                    return MaterialPage(
+                      key: state.pageKey,
+                      child: const ResultPage(),
+                    );
+                  },
+                ),
+              ]),
+        ]),
   ],
   errorPageBuilder: (context, state) => MaterialPage(
     key: state.pageKey,
@@ -49,3 +51,10 @@ final goRouter = GoRouter(
     ),
   ),
 );
+
+// rootまでPop
+void popUntilRoot() {
+  while (goRouter.canPop()) {
+    goRouter.pop();
+  }
+}

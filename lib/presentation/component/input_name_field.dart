@@ -15,8 +15,7 @@ class InputNameField extends ConsumerWidget {
       required this.id,
       required this.name,
       required this.profilePath,
-      required this.actorProvider
-      });
+      required this.actorProvider});
   final String id;
   final String name;
   final String profilePath;
@@ -27,11 +26,10 @@ class InputNameField extends ConsumerWidget {
     final List<String> nameArray = name.split(" ");
     List<TextEditingController> answer =
         ref.watch(answerProvider(nameArray.length));
-    final pref = ref.watch(sharedPreferencesProvider);
+    final pref = ref.read(sharedPreferencesProvider);
     AnswerUserCaseInterface answerUseCase = AnswerUseCaseImpl(pref: pref);
     return SizedBox(
       width: 300,
-      height: 200,
       child: Column(
         children: [
           SingleChildScrollView(
@@ -98,13 +96,30 @@ class InputNameField extends ConsumerWidget {
               };
               answerUseCase.addAnswer(result);
               if (answerUseCase.fetchAnswerLength()! >= 10) {
-                context.go('/result-page');
+                context.pushNamed('ResultPage');
               } else {
                 ref.invalidate(actorProvider);
               }
             },
             child: Text(
               AppLocalizations.of(context).answerButton,
+              style: const TextStyle(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              answerUseCase.initializeAnswer();
+              context.pop('/start-page');
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            child: Text(
+              AppLocalizations.of(context).back,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           )
         ],
