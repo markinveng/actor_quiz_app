@@ -14,6 +14,11 @@ class AnswerUseCaseImpl implements AnswerUserCaseInterface {
   }
 
   @override
+  int? getAnswerType(pref) {
+    answerRepository.getAnswerType(pref);
+  }
+
+  @override
   void addAnswer(Object answer) {
     answerRepository.addAnswer(answer, pref);
   }
