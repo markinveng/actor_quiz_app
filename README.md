@@ -30,3 +30,7 @@ fvm flutter pub run build_runner build --delete-conflicting-outputs
 ```sh
 fvm flutter run
 ```
+- リリースビルド
+```sh
+fvm flutter build appbundle
+```
