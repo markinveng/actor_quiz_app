@@ -30,7 +30,11 @@ fvm flutter pub run build_runner build --delete-conflicting-outputs
 ```sh
 fvm flutter run
 ```
-- リリースビルド
+- リリースビルド(iOS)
+```sh
+fvm flutter build ios
+```
+- リリースビルド(Android)
 ```sh
 fvm flutter build appbundle
 ```
